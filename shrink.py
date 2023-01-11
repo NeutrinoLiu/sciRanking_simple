@@ -9,15 +9,14 @@ with open(respFile, "r") as f:
 shrank = []
 for item in rawRank:
     # print(item)
-    # shrank.append(
-    #     {   
-    #         # "rank" : item["rank"],
-    #         "id" : item["id"],
-    #         "sciRank" : item["scientificRank"]["sciRank"] if item["scientificRank"] else None,
-    #     })
     shrank.append(
-        item["scientificRank"]["sciRank"] if item["scientificRank"] else None,
-        )
+        {   
+            "i" : item["id"],
+            "r" : item["scientificRank"]["sciRank"] if item["scientificRank"] else None,
+        })
+    # shrank.append(
+    #     item["scientificRank"]["sciRank"] if item["scientificRank"] else None,
+    #     )
     
 with open(targetName, "w+") as f:
     f.writelines(json.dumps(shrank))
