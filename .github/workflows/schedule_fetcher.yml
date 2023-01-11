@@ -12,20 +12,15 @@ jobs:
     steps:
     
     - uses: actions/checkout@v3
-    
-#     - name: get-raw-json
-#       id: myRequest
-#       uses: fjogeleit/http-request-action@v1
-#       with:
-#         url: 'https://chii.ai/api/subjects/ranking'
-#         method: 'GET'
-#         customHeaders: '{"Content-Type": "application/json"}'
-#     - name: echo-resp
-#       run: echo ${{ steps.myRequest.outputs.response }} > resp.json
+    - uses: actions/setup-python@v4
+      with:
+        python-version: '3.10' 
       
     - name: wget
       uses: wei/wget@v1
       with:
         args: -O resp.json https://chii.ai/api/subjects/ranking
+    - name: shrink
+      run: python3 shrink.py
       
     - uses: stefanzweifel/git-auto-commit-action@v4
