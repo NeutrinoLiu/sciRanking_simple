@@ -1,0 +1,32 @@
+name: schedule_fetcher
+
+on:
+  schedule:
+    - cron: '45 * * * *'
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run a one-line script
+        run: echo Hello, world!
+  
+  deployment:
+    runs-on: ubuntu-latest
+    steps:
+    - name: get-raw-json
+      uses: fjogeleit/http-request-action@v1
+      with:
+        url: 'https://chii.ai/api/subjects/ranking'
+        method: 'GET'
+        customHeaders: '{"Content-Type": "application/json"}'
+    - name: Show Response
+      run: |
+        echo ${{ steps.myRequest.outputs.response }}
+#        echo ${{ fromJson(steps.myRequest.outputs.response).field_you_want_to_access }}
+
+  
