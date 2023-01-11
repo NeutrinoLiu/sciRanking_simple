@@ -7,26 +7,20 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
-    # The type of runner that the job will run on
+  main:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Run a one-line script
-        run: echo Hello, world!
-  
-  deployment:
-    runs-on: ubuntu-latest
-    steps:
+    
+    - uses: actions/checkout@v3
+    
     - name: get-raw-json
+      id: myRequest
       uses: fjogeleit/http-request-action@v1
       with:
         url: 'https://chii.ai/api/subjects/ranking'
         method: 'GET'
         customHeaders: '{"Content-Type": "application/json"}'
-    - name: Show Response
-      run: |
-        echo ${{ steps.myRequest.outputs.response }}
-#        echo ${{ fromJson(steps.myRequest.outputs.response).field_you_want_to_access }}
-
-  
+    - name: echo-resp
+      run: echo ${{ steps.myRequest.outputs.response }} > resp.json
+      
+    - uses: stefanzweifel/git-auto-commit-action@v4
