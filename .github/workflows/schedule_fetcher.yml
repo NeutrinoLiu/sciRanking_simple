@@ -13,15 +13,19 @@ jobs:
     
     - uses: actions/checkout@v3
     
-    - name: get-raw-json
-      id: myRequest
-      uses: fjogeleit/http-request-action@v1
+#     - name: get-raw-json
+#       id: myRequest
+#       uses: fjogeleit/http-request-action@v1
+#       with:
+#         url: 'https://chii.ai/api/subjects/ranking'
+#         method: 'GET'
+#         customHeaders: '{"Content-Type": "application/json"}'
+#     - name: echo-resp
+#       run: echo ${{ steps.myRequest.outputs.response }} > resp.json
+      
+    - name: wget
+      uses: wei/wget@v1
       with:
-        #url: 'https://chii.ai/api/subjects/ranking'
-        url: 'https://google.com'
-        method: 'GET'
-        customHeaders: '{"Content-Type": "application/json"}'
-    - name: echo-resp
-      run: echo ${{ steps.myRequest.outputs.response }} > resp.json
+        args: -O resp.json https://chii.ai/api/subjects/ranking
       
     - uses: stefanzweifel/git-auto-commit-action@v4
