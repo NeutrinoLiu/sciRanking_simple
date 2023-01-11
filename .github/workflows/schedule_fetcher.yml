@@ -17,7 +17,8 @@ jobs:
       id: myRequest
       uses: fjogeleit/http-request-action@v1
       with:
-        url: 'https://chii.ai/api/subjects/ranking'
+        #url: 'https://chii.ai/api/subjects/ranking'
+        url: 'https://google.com'
         method: 'GET'
         customHeaders: '{"Content-Type": "application/json"}'
     - name: echo-resp
