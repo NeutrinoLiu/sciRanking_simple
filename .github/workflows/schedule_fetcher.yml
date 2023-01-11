@@ -2,7 +2,7 @@ name: schedule_fetcher
 
 on:
   schedule:
-    - cron: '45 * * * *'
+    - cron: '0 0 */1 * *'
 
   workflow_dispatch:
 
