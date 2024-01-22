@@ -30,9 +30,6 @@ jobs:
         data: '{"operationName": "GetRankingList","variables": {"type": "anime"},"query": "query GetRankingList($type: String!) {\n  queryRankingList(type: $type) {\n    ...SubjectSearchResult\n    __typename\n  }\n}\n\nfragment SubjectSearchResult on SearchResult {\n  scroll_id\n  took\n  timed_out\n  total\n  result {\n    ... on Subject {\n      ...Subject\n      __typename\n    }\n    __typename\n  }\n  __typename\n}\n\nfragment Subject on Subject {\n  id\n  name\n  nameCN\n  rank\n  type\n  score\n  scientificRank\n  tags {\n    ...Tag\n    __typename\n  }\n  date\n  __typename\n}\n\nfragment Tag on Tag {\n  content\n  userCount\n  confidence\n  __typename\n}"}'
         responseFile: 'resp.json'
 
-    - uses: stefanzweifel/git-auto-commit-action@v4
-
-
     - name: shrink
       run: python3 shrink.py
       
