@@ -3,7 +3,7 @@ import json
 respFile = "resp.json"
 targetName = "shrank.json"
 with open(respFile, "r") as f:
-    rawRank = json.load(f)
+    rawRank = json.load(f)['data']['queryRankingList']['result']
 
 shrank = []
 for item in rawRank:
