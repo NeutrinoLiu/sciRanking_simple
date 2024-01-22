@@ -10,7 +10,7 @@ for item in rawRank:
     shrank.append(
         {   
             "i" : item["id"],
-            "r" : item["scientificRank"]["sciRank"] if item["scientificRank"] else None,
+            "r" : item["scientificRank"] if item["scientificRank"] else None,
         })
     
 with open(targetName, "w+") as f:
